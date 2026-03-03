@@ -13,6 +13,7 @@ const TEST_STUDENT = {
     { code: "IT-222", name: "Data Structures", units: 3, midterm: 88, finals: 90 },
     { code: "IT-223", name: "Web Development", units: 3, midterm: 94, finals: 96 },
     { code: "GE-101", name: "Discrete Math", units: 3, midterm: 78, finals: 82 }
+    
   ]
 };
 
