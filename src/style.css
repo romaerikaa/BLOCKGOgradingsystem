@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 /* src/style.css */
 * {
   box-sizing: border-box; /* Prevents layout breaking */
@@ -11,8 +11,8 @@ html, body {
   height: 100%;
   font-family: 'Inter', 'Segoe UI', sans-serif;
   background-color: #f0f2f5;
-=======
-/* src/style.css */
+
+}/* src/style.css */
 * {
   box-sizing: border-box; /* Prevents layout breaking */
 }
@@ -24,5 +24,4 @@ html, body {
   height: 100%;
   font-family: 'Inter', 'Segoe UI', sans-serif;
   background-color: #f0f2f5;
->>>>>>> 6982dda5061a00ca7bdcf0e7e5d61f30f35c4878
 }
