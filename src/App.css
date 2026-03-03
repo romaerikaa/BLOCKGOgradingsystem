@@ -170,11 +170,19 @@ body, html {
 }
 
 .plv-table th {
-  background: var(--plv-black);
+  background: var(--plv-blue);
   color: var(--plv-yellow);
-  padding: 15px;
+  padding: 18px;
   text-align: left;
+  text-transform: uppercase;
   font-size: 0.85rem;
+  letter-spacing: 1px;
+  border-bottom: 3px solid var(--plv-yellow); /* Adds a nice gold divider */
+}
+
+/* Add a hover effect for a better UI experience */
+.plv-table tr:hover {
+  background-color: rgba(0, 51, 102, 0.03); /* Subtle blue highlight */
 }
 
 .plv-table td {
@@ -228,4 +236,23 @@ body, html {
 .drop-btn-small:hover {
   background: var(--fail-red);
   color: white;
+}
+
+.logout-btn {
+  background-color: transparent;
+  color: var(--plv-yellow);
+  border: 1.5px solid var(--plv-yellow);
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  align-self: center; /* Centers it vertically in the header */
+}
+
+.logout-btn:hover {
+  background-color: var(--plv-yellow);
+  color: var(--plv-blue);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
 }

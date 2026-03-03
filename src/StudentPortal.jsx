@@ -1,6 +1,6 @@
 import React from 'react';
 
-const StudentPortal = ({ studentData }) => {
+const StudentPortal = ({ studentData, onLogout }) => {
   // 1. Conversion Logic: Percentage to PLV Point Scale
   const getPLVPoint = (midterm, finals) => {
     const average = (midterm + finals) / 2;
@@ -28,7 +28,7 @@ const StudentPortal = ({ studentData }) => {
 
   return (
     <div className="portal-container">
-      {/* 1. Header with Stats & Branding */}
+      {/* 1. Header with Stats, Branding, & LOGOUT */}
       <header className="student-header">
         <div className="student-info">
           <h2>{studentData.name}</h2>
@@ -45,6 +45,11 @@ const StudentPortal = ({ studentData }) => {
             <span>SEMESTER GWA</span>
             <h3>{calculatedGWA}</h3>
           </div>
+          
+          {/* Added Logout Button */}
+          <button className="logout-btn" onClick={onLogout}>
+            LOGOUT
+          </button>
         </div>
       </header>
 
@@ -73,8 +78,8 @@ const StudentPortal = ({ studentData }) => {
                   <td className="sub-code">{sub.code || 'IT-XXX'}</td>
                   <td className="sub-title">{sub.name}</td>
                   <td className="units-count">{sub.units}</td>
-                  <td>{sub.midterm}%</td>
-                  <td>{sub.finals}%</td>
+                  <td>{sub.midterm}</td>
+                  <td>{sub.finals}</td>
                   <td className="final-point">{finalPoint.toFixed(2)}</td>
                   <td>
                     <span className={`status-pill ${passed ? 'passed' : 'failed'}`}>

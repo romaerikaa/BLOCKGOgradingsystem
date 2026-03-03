@@ -1,48 +1,44 @@
-// src/App.js
-import React, { useState } from "react"; // Added useState
+import React, { useState } from "react";
 import "./style.css"; 
 import "./App.css";   
 import Login from "./Login";
 import StudentPortal from './StudentPortal';
 
-// This is a sample student to test the portal features
+// Updated Mock Data to match your new Table & GWA logic
 const TEST_STUDENT = {
   name: "Mayumi",
   role: "student",
   subjects: [
-    { name: "Object Oriented Programming", units: 3, grade: 1.25 },
-    { name: "Data Structures", units: 3, grade: 1.50 },
-    { name: "Web Development", units: 3, grade: 1.25 },
-    { name: "Discrete Math", units: 3, grade: 2.00 }
+    { code: "IT-221", name: "Object Oriented Programming", units: 3, midterm: 85, finals: 95 },
+    { code: "IT-222", name: "Data Structures", units: 3, midterm: 88, finals: 90 },
+    { code: "IT-223", name: "Web Development", units: 3, midterm: 94, finals: 96 },
+    { code: "GE-101", name: "Discrete Math", units: 3, midterm: 78, finals: 82 }
   ]
 };
 
 function App() {
-  // 'user' is null by default. When logged in, it will hold the student's data.
   const [user, setUser] = useState(null);
 
-  // This function is passed to the Login component
   const handleLoginSuccess = (email) => {
-    console.log("Logged in as:", email);
-    // For now, we set the user to our TEST_STUDENT data
+    // This connects to the onLogin prop in your Login.jsx
     setUser(TEST_STUDENT);
   };
 
   const handleLogout = () => {
+    // This resets the state and forces React to show the Login screen
     setUser(null);
   };
 
   return (
     <div className="main-app-wrapper">
       {!user ? (
-        // If no user is logged in, show the Login page
         <Login onLogin={handleLoginSuccess} />
       ) : (
-        // Once logged in, show the Student Portal and pass the data
-        <div className="portal-wrapper">
-           <button className="logout-btn" onClick={handleLogout}>Logout</button>
-           <StudentPortal studentData={user} />
-        </div>
+        /* Notice we removed the extra <div> and button here. 
+           We now pass 'handleLogout' directly into the StudentPortal 
+           so the button can live inside your Navy Blue Header.
+        */
+        <StudentPortal studentData={user} onLogout={handleLogout} />
       )}
     </div>
   );
