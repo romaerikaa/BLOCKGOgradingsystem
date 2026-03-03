@@ -1,38 +1,231 @@
-.App {
+/* 1. VARIABLES & GLOBAL RESETS */
+:root {
+  --plv-blue: #003366;
+  --plv-yellow: #FFD700;
+  --plv-black: #1a1a1a;
+  --plv-white: #ffffff;
+  --pass-green: #28a745;
+  --fail-red: #dc3545;
+  --bg-gray: #f4f7f9;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+.main-app-wrapper {
+  height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+/* 2. LOGIN PAGE STYLES */
+.login-container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+.login-image-section {
+  flex: 1.2;
+  position: relative;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.login-image-section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent 70%);
+}
+
+.image-text-overlay {
+  position: absolute;
+  bottom: 60px;
+  left: 50px;
+  color: white;
+  z-index: 10;
+  max-width: 80%;
+}
+
+.image-text-overlay h1 {
+  font-size: 2.8rem;
+  font-family: 'Georgia', serif;
+  margin: 0;
+}
+
+.login-form-section {
+  flex: 0.8;
+  background-color: var(--plv-white);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 350px;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.plv-logo {
+  width: 100px;
+  margin-bottom: 10px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.welcome-text {
+  color: var(--plv-blue);
+  font-size: 1.8rem;
+  margin-bottom: 25px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.input-group {
+  text-align: left;
+  margin-bottom: 1.2rem;
+}
+
+.input-group label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: var(--plv-black);
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.sign-in-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--plv-blue);
   color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
 }
 
-.App-link {
-  color: #61dafb;
+.sign-in-btn:hover {
+  background-color: #002244;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* 3. STUDENT PORTAL STYLES */
+.portal-container {
+  padding: 40px;
+  background-color: var(--bg-gray);
+  min-height: 100vh;
+}
+
+.student-header {
+  background: var(--plv-blue);
+  color: white;
+  padding: 30px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 5px solid var(--plv-yellow);
+  margin-bottom: 30px;
+}
+
+.summary-section {
+  display: flex;
+  gap: 15px;
+}
+
+.stat-card {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.stat-card.gold {
+  background: var(--plv-yellow);
+  color: var(--plv-blue);
+  font-weight: bold;
+}
+
+/* 4. TABLE STYLES */
+.table-container {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.plv-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.plv-table th {
+  background: var(--plv-black);
+  color: var(--plv-yellow);
+  padding: 15px;
+  text-align: left;
+  font-size: 0.85rem;
+}
+
+.plv-table td {
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.final-point {
+  font-weight: 800;
+  color: var(--plv-blue);
+}
+
+/* 5. STATUS PILLS & BADGES */
+.status-pill {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 0.75rem;
+}
+
+.status-pill.passed { background: #e8f5e9; color: var(--pass-green); }
+.status-pill.failed { background: #ffebee; color: var(--fail-red); }
+
+.deans-lister-badge {
+  display: inline-block;
+  margin-top: 10px;
+  background: linear-gradient(45deg, var(--plv-yellow), #ffcc33);
+  color: var(--plv-blue);
+  padding: 5px 15px;
+  border-radius: 50px;
+  font-weight: 800;
+  font-size: 0.7rem;
+  box-shadow: 0 4px 10px rgba(255, 215, 0, 0.3);
+  animation: shine 2s infinite;
+}
+
+@keyframes shine {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+.drop-btn-small {
+  background: transparent;
+  border: 1px solid var(--fail-red);
+  color: var(--fail-red);
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.drop-btn-small:hover {
+  background: var(--fail-red);
+  color: white;
 }
