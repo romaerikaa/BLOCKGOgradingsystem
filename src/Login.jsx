@@ -19,7 +19,7 @@ const Login = () => {
           {/* Use the imported variable here */}
           <img src={plvlogo} alt="PLV Logo" className="plv-logo" />
           
-          <h2 className="welcome-text">Welcome</h2>
+          <h2 className="welcome-text">Welcome hi</h2>
           
           <form className="login-form">
             <div className="input-group">
