@@ -29,8 +29,8 @@ const Login = ({ onLogin }) => { // Accept onLogin prop from App.js
         <div className="login-card">
           <img src={plvlogo} alt="PLV Logo" className="plv-logo" />
           
-          
-          <h2 className="welcome-text">Welcome</h2>
+
+          <h2 className="welcome-text">Welcome xdxd</h2>
           
           {/* Added onSubmit handler */}
           <form className="login-form" onSubmit={handleSubmit}>
