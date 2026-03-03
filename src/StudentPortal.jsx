@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 2a7ae9328310fc76723915aff988f884d7011679
 import React from 'react';
 
 const StudentPortal = ({ studentData, onLogout }) => {
@@ -100,6 +103,7 @@ const StudentPortal = ({ studentData, onLogout }) => {
   );
 };
 
+<<<<<<< HEAD
 =======
 import React from 'react';
 
@@ -203,4 +207,6 @@ const StudentPortal = ({ studentData, onLogout }) => {
 };
 
 >>>>>>> 5a1e350bca3161df0ae8cbdb089b44ab4d1dd284
+=======
+>>>>>>> 2a7ae9328310fc76723915aff988f884d7011679
 export default StudentPortal;
