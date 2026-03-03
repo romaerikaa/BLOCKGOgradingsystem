@@ -1,7 +1,7 @@
 // src/Login.jsx
 import React, { useState } from 'react'; // Added useState
 import './App.css';
-import plvbg from './plvbg.jpg';
+import plvbg from './plvbg.png';
 import plvlogo from './plvlogo.png';
 
 const Login = ({ onLogin }) => { // Accept onLogin prop from App.js
@@ -9,12 +9,16 @@ const Login = ({ onLogin }) => { // Accept onLogin prop from App.js
   const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    
-    // In a real system, you'd verify the password here.
-    // For now, it tells App.js that a user has successfully logged in.
-    onLogin(email); 
-  };
+  e.preventDefault();
+  
+  // Validation check
+  if (!email.includes("faculty") && !email.includes("student")) {
+    alert("Unauthorized email address. Please use your school email.");
+    return;
+  }
+
+  onLogin(email); 
+};
 
   return (
     <div className="login-container">
@@ -37,11 +41,11 @@ const Login = ({ onLogin }) => { // Accept onLogin prop from App.js
             <div className="input-group">
               <label>Email</label>
               <input 
-                type="email" 
-                placeholder="username@gmail.com" 
-                value={email}
-                onChange={(e) => setEmail(e.target.value)} // Update email state
-                required 
+              type="email" 
+              placeholder="e.g. student@gmail.com or faculty@gmail.com" // More descriptive placeholder
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required 
               />
             </div>
             
