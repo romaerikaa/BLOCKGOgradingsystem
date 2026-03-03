@@ -1,0 +1,131 @@
+/* src/App.css */
+
+/* 1. GLOBAL WRAPPER */
+.main-app-wrapper {
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Prevents unwanted scrollbars */
+}
+
+.login-container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+/* 2. LEFT SIDE: Image Section */
+.login-image-section {
+  flex: 1.2;
+  position: relative;
+  /* background-image is handled in Login.jsx inline style */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+/* Dark gradient to make white text readable */
+.login-image-section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent 70%);
+}
+
+.image-text-overlay {
+  position: absolute;
+  bottom: 60px;
+  left: 50px;
+  color: white;
+  z-index: 10;
+  max-width: 80%;
+}
+
+.image-text-overlay h1 {
+  font-size: 2.8rem;
+  font-family: 'Georgia', serif;
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+.image-text-overlay p {
+  font-size: 1.3rem;
+  font-weight: 300;
+  letter-spacing: 1px;
+}
+
+/* 3. RIGHT SIDE: Solid White Panel */
+.login-form-section {
+  flex: 0.8;
+  background-color: #ffffff; /* This makes the whole right side white */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Removed the "Box" look—this is now a transparent container on a white panel */
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+  text-align: center;
+}
+
+/* 4. LOGO & FORM ELEMENTS */
+.plv-logo {
+  width: 120px;
+  margin-bottom: 10px;
+}
+
+.welcome-text {
+  color: #003366;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+.input-group {
+  text-align: left;
+  margin-bottom: 1.5rem;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #333;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-sizing: border-box; /* Crucial so padding doesn't break width */
+}
+
+.sign-in-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #003366;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.sign-in-btn:hover {
+  background-color: #002244;
+}
+
+.forgot-password {
+  margin-top: 20px;
+  display: block;
+  font-size: 14px;
+  color: #666;
+  cursor: pointer;
+}
