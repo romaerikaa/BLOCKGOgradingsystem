@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState } from "react";
 import "./style.css"; 
 import "./App.css";   
@@ -41,6 +42,18 @@ function App() {
         */
         <StudentPortal studentData={user} onLogout={handleLogout} />
       )}
+=======
+// src/App.js
+import React from "react";
+import "./style.css"; // Global resets
+import "./App.css";   // Layout styles
+import Login from "./Login";
+
+function App() {
+  return (
+    <div className="main-app-wrapper">
+      <Login />
+>>>>>>> 5a1e350bca3161df0ae8cbdb089b44ab4d1dd284
     </div>
   );
 }

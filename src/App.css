@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* 1. VARIABLES & GLOBAL RESETS */
 :root {
   --plv-blue: #003366;
@@ -31,11 +32,39 @@ body, html {
 .login-image-section {
   flex: 1.2;
   position: relative;
+=======
+/* src/App.css */
+
+/* 1. GLOBAL WRAPPER */
+.main-app-wrapper {
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Prevents unwanted scrollbars */
+}
+
+.login-container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+/* 2. LEFT SIDE: Image Section */
+.login-image-section {
+  flex: 1.2;
+  position: relative;
+  /* background-image is handled in Login.jsx inline style */
+>>>>>>> 5a1e350bca3161df0ae8cbdb089b44ab4d1dd284
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
 }
 
+<<<<<<< HEAD
+=======
+/* Dark gradient to make white text readable */
+>>>>>>> 5a1e350bca3161df0ae8cbdb089b44ab4d1dd284
 .login-image-section::after {
   content: '';
   position: absolute;
@@ -55,6 +84,7 @@ body, html {
 .image-text-overlay h1 {
   font-size: 2.8rem;
   font-family: 'Georgia', serif;
+<<<<<<< HEAD
   margin: 0;
 }
 
@@ -74,25 +104,75 @@ body, html {
 
 .plv-logo {
   width: 100px;
+=======
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+.image-text-overlay p {
+  font-size: 1.3rem;
+  font-weight: 300;
+  letter-spacing: 1px;
+}
+
+/* 3. RIGHT SIDE: Solid White Panel */
+.login-form-section {
+  flex: 0.8;
+  background-color: #ffffff; /* This makes the whole right side white */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Removed the "Box" look—this is now a transparent container on a white panel */
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+  text-align: center;
+}
+
+/* 4. LOGO & FORM ELEMENTS */
+.plv-logo {
+  width: 120px;
+>>>>>>> 5a1e350bca3161df0ae8cbdb089b44ab4d1dd284
   margin-bottom: 10px;
 }
 
 .welcome-text {
+<<<<<<< HEAD
   color: var(--plv-blue);
   font-size: 1.8rem;
   margin-bottom: 25px;
+=======
+  color: #003366;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+>>>>>>> 5a1e350bca3161df0ae8cbdb089b44ab4d1dd284
 }
 
 .input-group {
   text-align: left;
+<<<<<<< HEAD
   margin-bottom: 1.2rem;
+=======
+  margin-bottom: 1.5rem;
+>>>>>>> 5a1e350bca3161df0ae8cbdb089b44ab4d1dd284
 }
 
 .input-group label {
   display: block;
+<<<<<<< HEAD
   font-size: 14px;
   margin-bottom: 5px;
   color: var(--plv-black);
+=======
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #333;
+>>>>>>> 5a1e350bca3161df0ae8cbdb089b44ab4d1dd284
 }
 
 .input-group input {
@@ -100,25 +180,38 @@ body, html {
   padding: 12px;
   border: 1px solid #ddd;
   border-radius: 8px;
+<<<<<<< HEAD
   box-sizing: border-box;
+=======
+  box-sizing: border-box; /* Crucial so padding doesn't break width */
+>>>>>>> 5a1e350bca3161df0ae8cbdb089b44ab4d1dd284
 }
 
 .sign-in-btn {
   width: 100%;
   padding: 12px;
+<<<<<<< HEAD
   background-color: var(--plv-blue);
+=======
+  background-color: #003366;
+>>>>>>> 5a1e350bca3161df0ae8cbdb089b44ab4d1dd284
   color: white;
   border: none;
   border-radius: 8px;
   font-weight: bold;
   cursor: pointer;
+<<<<<<< HEAD
   transition: 0.2s;
+=======
+  transition: background 0.2s;
+>>>>>>> 5a1e350bca3161df0ae8cbdb089b44ab4d1dd284
 }
 
 .sign-in-btn:hover {
   background-color: #002244;
 }
 
+<<<<<<< HEAD
 /* 3. STUDENT PORTAL STYLES */
 .portal-container {
   padding: 40px;
@@ -255,4 +348,12 @@ body, html {
   color: var(--plv-blue);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+=======
+.forgot-password {
+  margin-top: 20px;
+  display: block;
+  font-size: 14px;
+  color: #666;
+  cursor: pointer;
+>>>>>>> 5a1e350bca3161df0ae8cbdb089b44ab4d1dd284
 }
