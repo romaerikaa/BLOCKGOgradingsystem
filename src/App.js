@@ -1,29 +1,41 @@
 import React, { useState } from "react";
-import "./style.css"; 
 import "./App.css";   
+import "./login.css";   
+import "./StudentPortal.css";
+import "./FacultyPortal.css";
 import Login from "./Login";
 import StudentPortal from './StudentPortal';
 import FacultyPortal from './FacultyPortal';
 
 // Mock Student Data
 const TEST_STUDENT = {
-  name: "Mayumi",
+  firstName: "Mayumi",
+  lastName: "Santos",
+  middleName: "Cruz",
+  sex: "Female",
+  studentId: "23 – 0000",
+  dateOfBirth: "January 1, 2000",
+  phone: "0900 000 0000",
+  email: "mayumisantos@student.edu.ph",
+  address: "123 Anywhere Street, Anywhere City",
   role: "student",
   subjects: [
-    { code: "IT-221", name: "Object Oriented Programming", units: 3, midterm: 85, finals: 95 },
-    { code: "IT-222", name: "Data Structures", units: 3, midterm: 88, finals: 90 },
-    { code: "IT-223", name: "Web Development", units: 3, midterm: 94, finals: 96 },
-    { code: "GE-101", name: "Discrete Math", units: 3, midterm: 78, finals: 82 }
+    { code: "IT-221", name: "Object Oriented Programming", units: 3, midterm: 100, finals: 100 },
+    { code: "IT-222", name: "Data Structures", units: 3, midterm: 100, finals: 100 },
+    { code: "IT-223", name: "Web Development", units: 3, midterm: 100, finals: 100 },
+    { code: "GE-101", name: "Discrete Math", units: 3, midterm: 100, finals: 100 }
   ]
 };
 
 // Mock Faculty Data
 const TEST_FACULTY = {
-  name: "Juan Rodriguez",
+  firstName: "Juan",
+  lastName: "Dela Cruz",
+  middleName: "Rodriguez",
+  sex: "Male",
   role: "faculty",
   department: "College of Information Technology",
   status: "Full-Time",
-  assignedClass: "IT-221: Object Oriented Programming"
 };
 
 function App() {

@@ -1,0 +1,97 @@
+
+/* 2. LOGIN PAGE STYLES */
+.login-container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+.login-image-section {
+  flex: 1.2;
+  position: relative;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.login-image-section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.image-text-overlay {
+  position: absolute;
+  bottom: 60px;
+  left: 50px;
+  color: white;
+  z-index: 10;
+  max-width: 80%;
+}
+
+.image-text-overlay h1 {
+  font-size: 2.8rem;
+  font-family: 'Georgia', serif;
+  margin: 0;
+}
+
+.login-form-section {
+  flex: 1;
+  background-color: var(--plv-white);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 350px;
+  text-align: center;
+}
+
+.plv-logo {
+  width: 100px;
+  margin-bottom: 10px;
+}
+
+.welcome-text {
+  color: var(--plv-blue);
+  font-size: 1.8rem;
+  margin-bottom: 25px;
+}
+
+.input-group {
+  text-align: left;
+  margin-bottom: 1.2rem;
+}
+
+.input-group label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: var(--plv-black);
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.sign-in-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--plv-blue);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.sign-in-btn:hover {
+  background-color: #002244;
+}
