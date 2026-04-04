@@ -1,19 +1,34 @@
 import React, { useState } from 'react';
+import plvlogo from './plvlogo.png';
 
 const FacultyPortal = ({ facultyData, onLogout }) => {
-  // 1. Data restructured by Section
   const [sections, setSections] = useState({
-    "BSIT 2-1": [
-      { id: '2023-001', name: 'Juan Dela Cruz', midterm: 85, finals: 90 },
-      { id: '2023-002', name: 'Maria Santos', midterm: 70, finals: 75 },
-    ],
-    "BSIT 2-2": [
-      { id: '2023-101', name: 'Ricardo Dalisay', midterm: 88, finals: 82 },
-      { id: '2023-102', name: 'Liza Soberano', midterm: 95, finals: 91 },
-    ],
-    "BSIT 3-1": [
-      { id: '2023-201', name: 'Boni Facio', midterm: 75, finals: 80 },
-    ]
+    "BSIT 2-1": {
+      subjectCode: "GE 101",
+      subjectTitle: "Understanding the Self",
+      sectionCourse: "BS Information Technology",
+      students: [
+        { id: '2023-001', name: 'Juan Dela Cruz', midterm: 85, finals: 90 },
+        { id: '2023-002', name: 'Maria Santos', midterm: 70, finals: 75 },
+      ]
+    },
+    "BSIT 2-2": {
+      subjectCode: "IT 21",
+      sectionCourse: "BS Information Technology",
+      subjectTitle: "Object Oriented Programming",
+      students: [
+        { id: '2023-101', name: 'Ricardo Dalisay', midterm: 88, finals: 82 },
+        { id: '2023-102', name: 'Liza Soberano', midterm: 95, finals: 91 },
+      ]
+    },
+    "BSIT 3-1": {
+      subjectCode: "IT 23",
+      subjectTitle: "Web Development",
+      sectionCourse: "BS Information Technology",
+      students: [
+        { id: '2023-201', name: 'Boni Facio', midterm: 75, finals: 80 },
+      ]
+    }
   });
 
   const [activeSection, setActiveSection] = useState(null);
@@ -26,18 +41,56 @@ const FacultyPortal = ({ facultyData, onLogout }) => {
   };
 
   const handleGradeChange = (sectionName, index, field, value) => {
-    const updatedSections = { ...sections };
-    updatedSections[sectionName][index][field] = parseFloat(value) || 0;
+    const updatedSections = JSON.parse(JSON.stringify(sections)); // Deep copy to avoid direct state mutation issues
+    updatedSections[sectionName].students[index][field] = parseFloat(value) || 0;
     setSections(updatedSections);
   };
 
-  const sectionNames = Object.keys(sections);
+  const ENCODING_START = new Date('2026-04-01');
+  const ENCODING_END = new Date('2026-04-06');
+
+
+  const getBannerState = () => {
+  const today = new Date();
+  const msPerDay = 1000 * 60 * 60 * 24;
+  const daysLeft = Math.ceil((ENCODING_END - today) / msPerDay);
+
+  if (today < ENCODING_START) {
+    return { state: 'closed', daysLeft: 0 };
+  } else if (today > ENCODING_END) {
+    return { state: 'over', daysLeft: 0 };
+  } else if (daysLeft <= 3) {
+    return { state: 'urgent', daysLeft };
+  } else {
+    return { state: 'open', daysLeft };
+  }
+  };
+
+  const banner = getBannerState();
+
+  const formatDate = (date) =>
+  date.toLocaleDateString('en-US', { month: 'long', day: '2-digit', year: 'numeric' });
 
   return (
     <div className="portal-container">
+
+    
+      {/* ── NAVBAR ── */}
+      <nav className="header-greetings">
+        <div className="greeting-text">
+          <div className="greeting-text-content">
+            <img src={plvlogo} alt="PLV Logo" className="plv-header-logo" />
+            <h1>Welcome, {facultyData.sex === "Male" ? "Mr." : "Ms./Mrs."} {facultyData.lastName}!</h1>
+          </div>
+          <button className="logout-btn" onClick={onLogout}>
+            LOGOUT
+          </button>
+        </div>
+      </nav>
+
     <header className="student-header">
     <div>
-        <h1 style={{ margin: 0 }}>Faculty Portal</h1>
+        <h1 style={{ margin: 0 }}>{facultyData.firstName} {facultyData.lastName}</h1>
         <h2 style={{ fontSize: '1.2rem', opacity: 0.9 }}>{facultyData.name}</h2>
         <p style={{ margin: '5px 0 0 0' }}>{facultyData.department}</p>
     </div>
@@ -55,38 +108,93 @@ const FacultyPortal = ({ facultyData, onLogout }) => {
             <div style={{ fontSize: '1.1rem' }}>{facultyData.status}</div>
         </div>
 
-    <button className="logout-btn" onClick={onLogout}>
-      LOGOUT
-    </button>
   </div>
     </header>
+    {banner.state === 'open' && (
+  <div className="banner-open encoding-banner">
+    <div>
+      <strong>Grade Encoding Period is Open!</strong>
+      <p>Finalize your section grades and upload to the Registrar by <strong>{formatDate(ENCODING_END)}</strong>.</p>
+    </div>
+  </div>
+)}
+
+{banner.state === 'urgent' && (
+  <div className="banner-open banner-urgent encoding-banner">
+    <div>
+      <strong>Grade Encoding Deadline in {banner.daysLeft} Day{banner.daysLeft > 1 ? 's' : ''}!</strong>
+      <p>You have <strong>{banner.daysLeft} day{banner.daysLeft > 1 ? 's' : ''}</strong> left to submit grades before the deadline on <strong>{formatDate(ENCODING_END)}</strong>. Please upload immediately to avoid penalties.</p>
+    </div>
+  </div>
+)}
+
+{banner.state === 'over' && (
+  <div className="banner-open banner-closed encoding-banner">
+    <div>
+      <strong>Grade Encoding Period is currently Closed.</strong>
+      <p>The encoding deadline has passed as of <strong>{formatDate(ENCODING_END)}</strong>. Contact or visit the Registrar's Office for any concerns.</p>
+    </div>
+  </div>
+)}
+
+{banner.state === 'closed' && (
+  <div className="banner-open banner-closed encoding-banner">
+    <div className="banner-icon">📅</div>
+    <div>
+      <strong>Grade Encoding is not yet Open</strong>
+      <p>The encoding period opens on <strong>{formatDate(ENCODING_START)}</strong>. Check back then to submit your grades.</p>
+    </div>
+  </div>
+)}
 
       {/* 2. Section Selector Cards */}
       {!activeSection ? (
-        <div className="section-grid">
-          {sectionNames.map((name) => (
-            <div key={name} className="stat-card section-card">
-              <h3>{name}</h3>
-              <p>{sections[name].length} Students</p>
-              <div className="section-actions">
-                <button className="sign-in-btn" onClick={() => setActiveSection(name)}>
-                  View Grades
-                </button>
-                <label className="upload-label">
-                  Upload Grading Sheet
-                  <input type="file" style={{ display: 'none' }} onChange={() => alert(`Sheet uploaded for ${name}`)} />
-                </label>
-                 <button className="upload-btn" onClick={() => setActiveSection(name)}>
-                  Upload to Registrar
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
+        <div className="section-grid"> 
+  {Object.entries(sections).map(([sectionName, sectionData]) => (
+    <div key={sectionName} className="section-card">
+      {/* 1. Subject Code Pill */}
+      <div className="subject-pill">{sectionData.subjectCode}</div>
+
+      {/* 2. Subject Title */}
+      <h2 className="subject-title">{sectionData.subjectTitle}</h2>
+
+      {/* 3. Section & Department Pill */}
+      <div className="section-dept-row"> 
+        <span className="section-name">{sectionName}</span>
+        <span className="dept-pill">{sectionData.sectionCourse}</span>
+      </div>
+
+      <hr className="card-divider" />
+
+      {/* 4. Mini Stats Row */}
+      <div className="card-stats">
+        <span>Students: {sectionData.students.length}</span>
+        <span>SY: 2025-2026</span>
+        <span>Semester: 2nd</span>
+      </div>
+ 
+      {/* 5. Action Buttons */}
+      <div className="section-actions">
+        <button className="view-btn" onClick={() => setActiveSection(sectionName)}>
+          View Grades
+        </button>
+        
+        <label className="upload-label">
+          Upload Grading Sheet
+          <input type="file" style={{ display: 'none' }} />
+        </label>
+
+        <button className="registrar-btn">
+          Upload to Registrar
+        </button>
+      </div>
+    </div>
+  ))}
+</div>
       ) : (
         /* 3. Grading Table View */
         <div>
-          <button className="drop-btn-small" onClick={() => setActiveSection(null)} style={{ marginBottom: '15px' }}>
+          <button className="back-btn" onClick={() => setActiveSection(null)}>
             ← Back to Sections
           </button>
           <div className="table-container">
@@ -105,7 +213,7 @@ const FacultyPortal = ({ facultyData, onLogout }) => {
                 </tr>
               </thead>
               <tbody>
-                {sections[activeSection].map((stu, index) => {
+                {sections[activeSection].students.map((stu, index) => {
                   const finalPoint = calculatePLVPoint(stu.midterm, stu.finals);
                   const isPassed = finalPoint <= 3.0;
                   return (
