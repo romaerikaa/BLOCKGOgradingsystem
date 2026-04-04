@@ -23,17 +23,8 @@ const StudentPortal = ({ studentData, onLogout }) => {
   }, 0);
   const calculatedGWA = totalUnits > 0 ? (totalWeight / totalUnits).toFixed(2) : "0.00";
 
-  // Compute failed subjects (grade of 5.00)
-  const failedSubjects = studentData.subjects.filter(
-    sub => getPLVPoint(sub.midterm, sub.finals) > 3.0
-  );
-  const failedUnits = failedSubjects.reduce((sum, sub) => sum + sub.units, 0);
-
-  // Auto-show warning on login if condition is met
-  useEffect(() => {
-    if (failedSubjects.length >= 3 && failedUnits >= 9) {
-      setShowWarning(true);
-    }  }, [failedSubjects.length, failedUnits]);
+  // 3. Status logic
+  const isDeansLister = calculatedGWA <= 1.75 && studentData.subjects.every(s => getPLVPoint(s.midterm, s.finals) <= 2.25);
 
   return (
     // The main container for the student portal
@@ -172,6 +163,10 @@ const StudentPortal = ({ studentData, onLogout }) => {
             <h3>{calculatedGWA}</h3>
           </div>
           
+          {/* Added Logout Button */}
+          <button className="logout-btn" onClick={onLogout}>
+            LOGOUT
+          </button>
         </div>
       </header>
 

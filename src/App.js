@@ -7,7 +7,7 @@ import Login from "./Login";
 import StudentPortal from './StudentPortal';
 import FacultyPortal from './FacultyPortal';
 
-// Mock Student Data
+// Mock Data
 const TEST_STUDENT = {
   firstName: "Mayumi",
   lastName: "Santos",
@@ -27,7 +27,6 @@ const TEST_STUDENT = {
   ]
 };
 
-// Mock Faculty Data
 const TEST_FACULTY = {
   firstName: "Juan",
   lastName: "Dela Cruz",
@@ -42,10 +41,10 @@ function App() {
   const [user, setUser] = useState(null);
 
   const handleLoginSuccess = (email) => {
-    // Logic to separate roles based on email
-    if (email.includes("faculty")) {
+    // Logic to separate roles based on email domain
+    if (email.toLowerCase().includes("faculty")) {
       setUser(TEST_FACULTY);
-    } else if (email.includes("student")) {
+    } else if (email.toLowerCase().includes("student")) {
       setUser(TEST_STUDENT);
     } else {
       alert("Invalid email domain. Please use @faculty or @student.");
@@ -61,7 +60,7 @@ function App() {
       {!user ? (
         <Login onLogin={handleLoginSuccess} />
       ) : (
-        // Conditional Rendering based on the user's role
+        /* Conditional Rendering based on the user's role */
         <>
           {user.role === "student" ? (
             <StudentPortal studentData={user} onLogout={handleLogout} />
