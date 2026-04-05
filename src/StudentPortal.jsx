@@ -13,29 +13,38 @@ const StudentPortal = ({ studentData, onLogout }) => {
     if (average >= 88) return 1.75;
     if (average >= 85) return 2.00;
     if (average >= 75) return 3.00;
-    return 5.00;
+    return 5.00; // Failing grade
   };
 
+  // --- CALCULATION LOGIC ---
   const totalUnits = studentData.subjects.reduce((sum, sub) => sum + sub.units, 0);
   const totalWeight = studentData.subjects.reduce((sum, sub) => {
     const point = getPLVPoint(sub.midterm, sub.finals);
     return sum + (point * sub.units);
   }, 0);
+  
   const calculatedGWA = totalUnits > 0 ? (totalWeight / totalUnits).toFixed(2) : "0.00";
 
-  // 3. Status logic
+  // --- FIX: Define failedSubjects and failedUnits ---
+  const failedSubjects = studentData.subjects.filter(sub => getPLVPoint(sub.midterm, sub.finals) === 5.00);
+  const failedUnits = failedSubjects.reduce((sum, sub) => sum + sub.units, 0);
+
+  // Auto-show warning if they have failed subjects
+  useEffect(() => {
+    if (failedSubjects.length > 0) {
+      setShowWarning(true);
+    }
+  }, [failedSubjects.length]);
+
   const isDeansLister = calculatedGWA <= 1.75 && studentData.subjects.every(s => getPLVPoint(s.midterm, s.finals) <= 2.25);
 
   return (
-    // The main container for the student portal
     <div className="portal-container">
 
       {/* ── ACADEMIC WARNING MODAL ── */}
       {showWarning && (
         <div className="warning-overlay">
           <div className="warning-modal">
-
-            {/* Red Header */}
             <div className="warning-modal-header">
               <div className="warning-icon-circle">
                 <span className="warning-triangle">⚠</span>
@@ -46,7 +55,6 @@ const StudentPortal = ({ studentData, onLogout }) => {
               </div>
             </div>
 
-            {/* Body */}
             <div className="warning-modal-body">
               <p className="warning-description">
                 You have{' '}
@@ -56,26 +64,23 @@ const StudentPortal = ({ studentData, onLogout }) => {
                 . Please proceed to the Registrar's Office for proper assessment or transfer out process.
               </p>
 
-              {/* Failed subjects list */}
               <div className="warning-subjects-list">
                 {failedSubjects.map((sub, index) => (
                   <div className="warning-subject-row" key={index}>
                     <span className="warning-subject-name">
-                      {sub.code} — {sub.name}
+                      {sub.code || 'N/A'} — {sub.name}
                     </span>
                     <span className="warning-subject-grade">5.00</span>
                   </div>
                 ))}
               </div>
 
-              {/* Action buttons */}
               <div className="warning-actions">
                 <button className="warning-btn-secondary" onClick={() => setShowWarning(false)}>
-                  Continue
+                  Continue to Portal
                 </button>
               </div>
             </div>
-
           </div>
         </div>
       )}
@@ -148,7 +153,7 @@ const StudentPortal = ({ studentData, onLogout }) => {
           <p>1st Semester Grades</p>
         </div>
         <div className="summary-section">
-          {parseFloat(calculatedGWA) <= 1.50 && (
+          {isDeansLister && (
             <div className="dean-card">
               <span>Dean's Lister</span>
             </div>
@@ -162,11 +167,6 @@ const StudentPortal = ({ studentData, onLogout }) => {
             <span>Average</span>
             <h3>{calculatedGWA}</h3>
           </div>
-          
-          {/* Added Logout Button */}
-          <button className="logout-btn" onClick={onLogout}>
-            LOGOUT
-          </button>
         </div>
       </header>
 
@@ -212,7 +212,7 @@ const StudentPortal = ({ studentData, onLogout }) => {
       {failedSubjects.length >= 2 && (
         <div className="grade-warning-section">
           <p>
-             Academic Warning: You have{' '}
+              Academic Warning: You have{' '}
             <strong>
               {failedSubjects.length} failed subject{failedSubjects.length > 1 ? 's' : ''} equivalent to {failedUnits} units
             </strong>. Please visit the Registrar's Office for assistance or assessment.
