@@ -32,11 +32,6 @@ const Login = ({ onLogin }) => { // Accept onLogin prop from App.js
       <div className="login-form-section">
         <div className="login-card">
 
-          <img src={plvlogo} alt="PLV Logo" className="plv-logo" />
-          
-
-          <h2 className="welcome-text">HELLO Welcome</h2>
-=======
           <img src={plvlogo} alt="PLV Logo" className="plv-logo"/>
           <h2 className="welcome-text">Welcome</h2>
           
