@@ -10,7 +10,7 @@ const FacultyPortal = ({ facultyData, onLogout }) => {
   const [validationErrors, setValidationErrors] = useState({});
 
   const [sections, setSections] = useState({
-    "BSA 1-5":      { year: "1st Year", subjectCode: "ARC 11",  subjectTitle: "Architectural Visual Communications",      sectionCourse: "BS Architecture",          students: [{ id: '2025-701', name: 'Juan Luna',        midterm: 0,  finals: 0,  remarks: 'Incomplete' }, { id: '2025-702', name: 'Maria Reyes', midterm: 0, finals: 0, remarks: 'Incomplete' }] },
+    "BSA 1-5":      { year: "1st Year", subjectCode: "ARC 11",  subjectTitle: "Architectural Visual Communications",      sectionCourse: "BS Civil Engineering",          students: [{ id: '2025-701', name: 'Juan Luna',        midterm: 0,  finals: 0,  remarks: 'Incomplete' }, { id: '2025-702', name: 'Maria Reyes', midterm: 0, finals: 0, remarks: 'Incomplete' }] },
     "BSIT 2-1":     { year: "2nd Year", subjectCode: "GE 101",  subjectTitle: "Understanding the Self",                   sectionCourse: "BS Information Technology", students: [{ id: '2023-001', name: 'Juan Dela Cruz',   midterm: 85, finals: 90, remarks: 'Passed' }] },
     "BSIT 2-2":     { year: "2nd Year", subjectCode: "IT 21",   subjectTitle: "Object Oriented Programming",              sectionCourse: "BS Information Technology", students: [{ id: '2023-101', name: 'Ricardo Dalisay',  midterm: 88, finals: 82, remarks: 'Passed' }] },
     "BSIT 3-1":     { year: "3rd Year", subjectCode: "IT 23",   subjectTitle: "Web Development",                          sectionCourse: "BS Information Technology", students: [{ id: '2023-201', name: 'Boni Facio',       midterm: 75, finals: 80, remarks: 'Passed' }] },
@@ -163,6 +163,7 @@ const FacultyPortal = ({ facultyData, onLogout }) => {
       <header className="student-header">
         <div>
           <h1 style={{ margin: 0 }}>{facultyData.firstName} {facultyData.lastName}</h1>
+          <h2 style={{ fontSize: '1.2rem', opacity: 0.9 }}>{facultyData.facultyId}</h2>
           <h2 style={{ fontSize: '1.2rem', opacity: 0.9 }}>{facultyData.name}</h2>
           <p>{facultyData.department}</p>
         </div>
@@ -185,7 +186,6 @@ const FacultyPortal = ({ facultyData, onLogout }) => {
 
       {bannerState === 'closed_before' && (
         <div className="encoding-banner banner-closed">
-          <div className="banner-icon-wrap closed-icon">📅</div>
           <div>
             <strong>Grade Encoding Period has not started yet</strong>
             <p>Encoding opens on <strong>{formatDate(ENCODING_START)}</strong>. Please check back then.</p>
@@ -194,18 +194,15 @@ const FacultyPortal = ({ facultyData, onLogout }) => {
       )}
 
       {bannerState === 'open' && (
-        <div className="encoding-banner banner-open">
-          <div className="banner-icon-wrap open-icon">✅</div>
-          <div>
+        <div className="encoding-banner banner-open">          <div>
             <strong>Grade Encoding Period is Open!</strong>
-            <p>Finalize your section grades and upload to the Registrar by<strong>{formatDate(ENCODING_END)}</strong></p>
+            <p>Finalize your section grades and upload to the Registrar by <strong>{formatDate(ENCODING_END)}</strong></p>
           </div>
         </div>
       )}
 
       {bannerState === 'urgent' && (
         <div className="encoding-banner banner-urgent">
-          <div className="banner-icon-wrap urgent-icon">⚠️</div>
           <div>
             <strong>Encoding Deadline in {daysLeft} {daysLeft === 1 ? 'Day' : 'Days'}!</strong>
             <p>You have <strong>{daysLeft} {daysLeft === 1 ? 'day' : 'days'}</strong> left to submit grades before the deadline on <strong>{formatDate(ENCODING_END)}</strong>. Please upload immediately to avoid penalties.</p>

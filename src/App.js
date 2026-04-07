@@ -35,6 +35,7 @@ const TEST_FACULTY = {
   role: "faculty",
   department: "College of Information Technology",
   status: "Full-Time",
+  facultyId: "F-0000",
 };
 
 function App() {

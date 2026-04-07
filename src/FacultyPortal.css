@@ -111,12 +111,6 @@ body { background-color: #f1f5f9; margin: 0; }
 }
 .banner-urgent strong { color: #450a0a; }
 
-/* Banner icon wrapper */
-.banner-icon-wrap {
-  font-size: 1.2rem;
-  flex-shrink: 0;
-  margin-top: 1px;
-}
 
 /* ── FILTER TABS ── */
 .filter-tabs-container {

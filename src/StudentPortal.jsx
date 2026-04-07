@@ -171,6 +171,7 @@ const StudentPortal = ({ studentData, onLogout }) => {
       </header>
 
       {/* ── GRADE TABLE ── */}
+      
       <div className="table-container">
         <table className="plv-table">
           <thead>
@@ -207,6 +208,7 @@ const StudentPortal = ({ studentData, onLogout }) => {
           </tbody>
         </table>
       </div>
+
 
       {/* ── CONDITIONAL GRADE WARNING SECTION ── */}
       {failedSubjects.length >= 2 && (
